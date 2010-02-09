@@ -53,7 +53,7 @@ module Mongrel
     # Reports process as handling a socket.
     def set_handling(request)
       params = request.params
-      address = params['REMOTE_ADDR']
+      address = params['HTTP_X_FORWARDED_FOR'] || params['REMOTE_ADDR']
       method = params['REQUEST_METHOD']
       path = params['REQUEST_PATH']
       path = "#{path[0, 60]}..." if path.length > 60
